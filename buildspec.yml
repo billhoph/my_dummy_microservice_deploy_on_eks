@@ -17,6 +17,6 @@ phases:
   post_build:
     commands:
       - echo "Update Kube Config"      
-      - aws eks update-kubeconfig --name bhlab-demo-eks-01
+      - aws eks --region ap-northeast-1 update-kubeconfig --name bhlab-demo-eks-01
       - echo "Apply changes to kube manifests"
       - kubectl apply -f busybox-deployment.yaml
