@@ -17,8 +17,6 @@ phases:
   post_build:
     commands:
       # Setup kubectl with our EKS Cluster              
-      - echo "Update Kube Config"      
-      - aws eks update-kubeconfig --name $EKS_CLUSTER_NAME
       - echo "Update Kube Config"
       - aws eks --region ap-northeast-1 update-kubeconfig --name bhlab-demo-eks-01
       - echo "Apply changes to kube manifests"
