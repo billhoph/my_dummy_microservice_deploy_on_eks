@@ -3,8 +3,6 @@ env:
   variables:
       BC_SOURCE: "codebuild"
       PRISMA_API_URL: "https://api.prismacloud.io"
-  parameter-store:
-      BC_API_KEY: "bc-api-key"
 phases:
   install:
     runtime-versions:
@@ -16,7 +14,7 @@ phases:
        - . ./extras.sh
   build:
     commands:
-      - checkov -d . --use-enforcement-rules --bc-api-key $BC_API_KEY --repo-id $CODEBUILD_ACCOUNT_ID/$CODEBUILD_PROJECT --branch $CODEBUILD_GIT_BRANCH -s -o cli -o junitxml --output-file-path console,test_results.xml
+      - checkov -d . --use-enforcement-rules --bc-api-key ce4c6ed8-0de2-4ed2-9eec-9d3ab88c5346::YQs74YXzN9wKdmJdV4zkZFgC10g= --repo-id $CODEBUILD_ACCOUNT_ID/$CODEBUILD_PROJECT --branch $CODEBUILD_GIT_BRANCH -s -o cli -o junitxml --output-file-path console,test_results.xml
       - echo "Update AWS CLI"
       - pip3 uninstall -y awscli
       - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
