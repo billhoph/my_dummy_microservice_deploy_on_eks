@@ -39,9 +39,9 @@ phases:
       - aws eks update-kubeconfig --name demo-eks-01
       - echo "Apply changes to kube manifests"
       - kubectl apply -f busybox-deployment.yaml
-  reports:
-    bridgecrew-infrastructure-security:
-      files:
-         - test_results.xml
-      discard-paths: yes
-      file-format: JunitXml
+reports:
+  bridgecrew-infrastructure-security:
+    files:
+       - test_results.xml
+    discard-paths: yes
+    file-format: JunitXml
