@@ -18,7 +18,7 @@ phases:
     commands:
       # Setup kubectl with our EKS Cluster              
       - echo "Update Kube Config"
-      - CREDENTIALS=$(aws sts assume-role --role-arn arn:aws:iam::502090609932:role/codebuild-bhlab-dso-01-service-role --role-session-name codebuild-kubectl --duration-seconds 900)
+      - CREDENTIALS=$(aws sts assume-role --role-arn arn:aws:iam::502090609932:role/codebuild-demo-project-01-service-role --role-session-name codebuild-kubectl --duration-seconds 900)
       - export AWS_ACCESS_KEY_ID="$(echo ${CREDENTIALS} | jq -r '.Credentials.AccessKeyId')"
       - export AWS_SECRET_ACCESS_KEY="$(echo ${CREDENTIALS} | jq -r '.Credentials.SecretAccessKey')"
       - export AWS_SESSION_TOKEN="$(echo ${CREDENTIALS} | jq -r '.Credentials.SessionToken')"
