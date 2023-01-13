@@ -14,7 +14,7 @@ phases:
        - . ./extras.sh
   build:
     commands:
-      - checkov -d . --use-enforcement-rules --bc-api-key ce4c6ed8-0de2-4ed2-9eec-9d3ab88c5346::YQs74YXzN9wKdmJdV4zkZFgC10g= --repo-id $CODEBUILD_ACCOUNT_ID/$CODEBUILD_PROJECT --branch $CODEBUILD_GIT_BRANCH -s -o cli -o junitxml --output-file-path console,test_results.xml
+      - checkov -d . --use-enforcement-rules --bc-api-key <key> --repo-id $CODEBUILD_ACCOUNT_ID/$CODEBUILD_PROJECT --branch $CODEBUILD_GIT_BRANCH -s -o cli -o junitxml --output-file-path console,test_results.xml
       - echo "Update AWS CLI"
       - pip3 uninstall -y awscli
       - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
@@ -31,9 +31,9 @@ phases:
     commands:
       # Setup kubectl with our EKS Cluster              
       - echo "Update Kube Config"
-      - export AWS_ACCESS_KEY_ID="ASIAXJZXOWUGFJBXDGPZ"
-      - export AWS_SECRET_ACCESS_KEY="Ke26UIzbmifACsETsb0eRKyW+cw8KnK+347gMCXM"
-      - export AWS_SESSION_TOKEN="IQoJb3JpZ2luX2VjEIL//////////wEaCXVzLXdlc3QtMiJHMEUCIAOKgC6VWTqwW95IqpDWnfRFBhgm4IYNIaM4BVuv0A7CAiEAxNqBjvGR8kwjw+7XGB2D+WgOORlG7pSAIhPqWy5BK4gqmgMI2///////////ARAAGgw1MDIwOTA2MDk5MzIiDEr1xJtSKTZt2qJwcCruAnRLKjc7aXslNUFjQQg/a2iEkqyZdv0sZbR06EfSjOFw02r8IdHXO/tgaKOc3sScjZelXUbPcVUnfFqC7sAhdVKuX5ql6gk8YaRyhKPeV8NQhvnDHAd42PAA4zfDxaY3/heq5289GGXDLl0d59+U+ieL+I+bvjCTlnxSEvNccO4b7AuDWvmBq0/k3FIER4DE2njX+TzOdRpx/ZN0nXJqlRPniJ3lPXCpLvvrPfGa9FCIu4x/+5lnegGPuBzPD0fTtQ6FleERWO5EsMI1q2ssFjjz6J71G0enhqmyG8NtwzXY4ssjc3XBnM8KkaK1IFw96oc3zWKvFLBXodWZA+B1Hi2k0Azqzs5aEnHZAYYO0i1/4yPYZYhVUQ9rHqoyEbQOtsVWr7sI1PgimnRkMUhy8z5XmFLeNoepKBm/5V7abkd8OGpV0bJs4uo2dHk4lklwsKfpdj9TtynoQQGTai1BdJvM4FejAbbtHffxlpdd6zCes4aeBjqmAZr03aNviHPr5Wk5Cq8KlNQPMhdQGXib7M1VdF5KsksRX+KIV844Decwhe+LCudr07jk5GqzRgHuj/T0V2pm1XbMh32M7203xlkxQEwZCc87bLuZDfonfWW5eDxVSk4PNU90GAScs2XzE1ssM0GWhqG8DtpK056WwY+uUZ4xUP7u67vHFUqhfxROhvkkfRn1vFEjuhsYud6MWtD/o0bOGbDBzWZurfc="      
+      - export AWS_ACCESS_KEY_ID=""
+      - export AWS_SECRET_ACCESS_KEY=""
+      - export AWS_SESSION_TOKEN=""      
       - aws eks update-kubeconfig --name demo-eks-01
       - echo "Apply changes to kube manifests"
       - kubectl apply -f busybox-deployment.yaml
