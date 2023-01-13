@@ -1,7 +1,22 @@
 version: 0.2
+env:
+  variables:
+      BC_SOURCE: "codebuild"
+      PRISMA_API_URL: "https://api.prismacloud.io"
+  parameter-store:
+      BC_API_KEY: "bc-api-key"
 phases:
+  install:
+    runtime-versions:
+      python: 3.7
+    commands:
+       - pip3 install bridgecrew
+       - echo Installing codebuild-extras...
+       - curl -fsSL https://raw.githubusercontent.com/bridgecrewio/aws-codebuild-extras/master/install >> extras.sh
+       - . ./extras.sh
   build:
     commands:
+      - checkov -d . --use-enforcement-rules --bc-api-key $BC_API_KEY --repo-id $CODEBUILD_ACCOUNT_ID/$CODEBUILD_PROJECT --branch $CODEBUILD_GIT_BRANCH -s -o cli -o junitxml --output-file-path console,test_results.xml
       - echo "Update AWS CLI"
       - pip3 uninstall -y awscli
       - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
@@ -24,3 +39,9 @@ phases:
       - aws eks update-kubeconfig --name demo-eks-01
       - echo "Apply changes to kube manifests"
       - kubectl apply -f busybox-deployment.yaml
+  reports:
+    bridgecrew-infrastructure-security:
+      files:
+         - test_results.xml
+      discard-paths: yes
+      file-format: JunitXml
